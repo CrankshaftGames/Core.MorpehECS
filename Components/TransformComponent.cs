@@ -1,10 +1,12 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-namespace RedOut.Gameplay.Features.Common.Components
+namespace Core.ECS.Components
 {
-	public struct TransformComponent : IComponent
-	{
-		public Transform Reference;
-	}
+    public struct TransformComponent : IComponent
+    {
+        public Vector3 Position;
+        public Quaternion Rotation;
+        public Vector3 Scale;
+    }
 }

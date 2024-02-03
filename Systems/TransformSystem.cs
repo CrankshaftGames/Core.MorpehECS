@@ -1,33 +1,27 @@
+using Core.ECS.Components.View;
 using Core.ECS.Components;
-using RedOut.Gameplay.Features.Common.Components;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Native;
 
-namespace Assets.Core.ECS.Systems
+namespace Core.ECS.Systems
 {
 	public class TransformSystem : ISystem
 	{
 		public World World { get; set; }
-		private NativeStash<PositionComponent> _positionStash;
-		private NativeStash<RotationComponent> _rotationStash;
-		private NativeStash<ScaleComponent> _scaleStash;
-		private Stash<TransformComponent> _transformStash;
+		private NativeStash<TransformComponent> _transformStash;
+		private Stash<TransformViewComponent> _transformViewStash;
 		private NativeFilter _filter;
 
 		public void OnAwake()
 		{
 			_filter = World.Filter
-				.With<PositionComponent>()
-				.With<RotationComponent>()
-				.With<ScaleComponent>()
 				.With<TransformComponent>()
+				.With<TransformViewComponent>()
 				.Build()
 				.AsNative();
 
-			_positionStash = World.GetStash<PositionComponent>().AsNative();
-			_rotationStash = World.GetStash<RotationComponent>().AsNative();
-			_scaleStash = World.GetStash<ScaleComponent>().AsNative();
-			_transformStash = World.GetStash<TransformComponent>();
+			_transformStash = World.GetStash<TransformComponent>().AsNative();
+			_transformViewStash = World.GetStash<TransformViewComponent>();
 		}
 
 		public void OnUpdate(float deltaTime)
@@ -36,18 +30,16 @@ namespace Assets.Core.ECS.Systems
 			{
 				var entityId = _filter[i];
 				World.TryGetEntity(entityId, out var entity);
-				var pos = _positionStash.Get(entityId);
-				var rot = _rotationStash.Get(entityId);
-				var sca = _scaleStash.Get(entityId);
-				var tr = _transformStash.Get(entity);
-				tr.Reference.SetPositionAndRotation(pos.Value, rot.Value);
-				tr.Reference.localScale = sca.Value;
+				var tr = _transformStash.Get(entityId);
+				var view = _transformViewStash.Get(entity);
+				view.Reference.SetPositionAndRotation(tr.Position, tr.Rotation);
+				view.Reference.localScale = tr.Scale;
 			}
 		}
 
 		public void Dispose()
 		{
-			_transformStash?.Dispose();
+			_transformViewStash?.Dispose();
 		}
 	}
 }

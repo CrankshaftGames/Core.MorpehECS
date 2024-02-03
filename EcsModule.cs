@@ -10,6 +10,7 @@ namespace Core.ECS
 
         private SystemsGroup _systemsGroup;
         private bool _enabled;
+        private static int _order;
 
         protected EcsModule(World world, ISystemFactory systemFactory)
         {
@@ -17,7 +18,7 @@ namespace Core.ECS
             _systemFactory = systemFactory;
         }
 
-        public void Enable(int order = 0)
+        public void Enable()
         {
             var systems = CreateSystems();
 
@@ -28,7 +29,7 @@ namespace Core.ECS
                 _systemsGroup.AddSystem(system);
             }
 
-            _world.AddSystemsGroup(order, _systemsGroup);
+            _world.AddSystemsGroup(_order++, _systemsGroup);
 
             _enabled = true;
         }

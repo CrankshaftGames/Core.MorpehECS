@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
 
-namespace RedOut.Gameplay.Features.Common.Components
+namespace Core.ECS.Components
 {
 	public struct InputComponent :IComponent
 	{

@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using Assets.Core.ECS.Systems;
-using Core.ECS;
+using Core.ECS.Systems;
 using Scellecs.Morpeh;
 
-namespace Assets.Core.ECS.Modules
+namespace Core.ECS.Modules
 {
     public class TransformationModule : EcsModule
     {

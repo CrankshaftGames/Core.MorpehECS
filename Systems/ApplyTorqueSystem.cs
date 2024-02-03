@@ -1,26 +1,32 @@
+using Core.ECS.Components;
+using Core.ECS.Components.View;
 using Scellecs.Morpeh;
+using UnityEngine;
 
-namespace RedOut.Gameplay.Features.Common.Systems
+namespace Core.ECS.Systems
 {
 	public class ApplyTorqueSystem : IFixedSystem
 	{
-		private World _world;
-
-		public void Dispose()
-		{
-		}
+		private Filter _filter;
+		public World World { get; set; }
 
 		public void OnAwake()
 		{
-		}
-
-		public World World
-		{
-			get => _world;
-			set => _world = value;
+			_filter = World.Filter.With<RigidbodyViewComponent>().With<TorqueComponent>().Build();
 		}
 
 		public void OnUpdate(float deltaTime)
+		{
+			foreach (var entity in _filter)
+			{
+				var rigidbody = entity.GetComponent<RigidbodyViewComponent>();
+				var torque = entity.GetComponent<ForceComponent>();
+
+				rigidbody.Ref.AddTorque(torque.Val, ForceMode.Force);
+			}
+		}
+
+		public void Dispose()
 		{
 		}
 	}

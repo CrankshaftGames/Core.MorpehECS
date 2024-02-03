@@ -1,8 +1,9 @@
-using RedOut.Gameplay.Features.Common.Components;
+using Core.ECS.Components;
+using Core.ECS.Components.View;
 using Scellecs.Morpeh;
 using UnityEngine;
 
-namespace RedOut.Gameplay.Features.Common.Systems
+namespace Core.ECS.Systems
 {
 	public class ApplyForcesSystem : IFixedSystem
 	{
@@ -11,16 +12,16 @@ namespace RedOut.Gameplay.Features.Common.Systems
 
 		public void OnAwake()
 		{
-			_filter = World.Filter.With<RigidbodyComponent>().With<ForceComponent>().Build();
+			_filter = World.Filter.With<RigidbodyViewComponent>().With<ForceComponent>().Build();
 		}
 
 		public void OnUpdate(float deltaTime)
 		{
 			foreach (var entity in _filter)
 			{
-				var rigidbody = entity.GetComponent<RigidbodyComponent>();
+				var rigidbody = entity.GetComponent<RigidbodyViewComponent>();
 				var force = entity.GetComponent<ForceComponent>();
-				
+
 				rigidbody.Ref.AddForce(force.Val, ForceMode.Force);
 			}
 		}
