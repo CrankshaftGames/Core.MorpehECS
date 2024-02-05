@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Core.ECS.Components
 {
-	public struct TorqueComponent : IComponent
-	{
-		public Vector3 Value;
-	}
+    public struct TorqueComponent : IComponent
+    {
+        public Vector3 Value;
+    }
 }

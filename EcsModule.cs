@@ -1,16 +1,18 @@
+using System;
 using System.Collections.Generic;
+using Core.Infrastructure.Features;
 using Scellecs.Morpeh;
 
 namespace Core.ECS
 {
-    public abstract class EcsModule
+    public abstract class EcsModule : IFeatureModule
     {
-        private readonly World _world;
+        private static int _order;
         private readonly ISystemFactory _systemFactory;
+        private readonly World _world;
+        private bool _enabled;
 
         private SystemsGroup _systemsGroup;
-        private bool _enabled;
-        private static int _order;
 
         protected EcsModule(World world, ISystemFactory systemFactory)
         {
@@ -36,15 +38,13 @@ namespace Core.ECS
 
         public void Disable()
         {
-            if (_enabled)
-            {
-                _world.RemoveSystemsGroup(_systemsGroup);
-            }
+            if (_enabled) _world.RemoveSystemsGroup(_systemsGroup);
 
             _enabled = false;
         }
 
         protected abstract IEnumerable<ISystem> CreateSystems();
+        public abstract IEnumerable<Type> GetSystemTypes();
 
         protected ISystem CreateSystem<T>() where T : ISystem
         {

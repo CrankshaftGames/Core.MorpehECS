@@ -5,29 +5,29 @@ using UnityEngine;
 
 namespace Core.ECS.Systems
 {
-	public class ApplyForcesSystem : IFixedSystem
-	{
-		private Filter _filter;
-		public World World { get; set; }
+    public class ApplyForcesSystem : IFixedSystem
+    {
+        private Filter _filter;
+        public World World { get; set; }
 
-		public void OnAwake()
-		{
-			_filter = World.Filter.With<RigidbodyViewComponent>().With<ForceComponent>().Build();
-		}
+        public void OnAwake()
+        {
+            _filter = World.Filter.With<RigidbodyViewComponent>().With<ForceComponent>().Build();
+        }
 
-		public void OnUpdate(float deltaTime)
-		{
-			foreach (var entity in _filter)
-			{
-				var rigidbody = entity.GetComponent<RigidbodyViewComponent>();
-				var force = entity.GetComponent<ForceComponent>();
+        public void OnUpdate(float deltaTime)
+        {
+            foreach (var entity in _filter)
+            {
+                var rigidbody = entity.GetComponent<RigidbodyViewComponent>();
+                var force = entity.GetComponent<ForceComponent>();
 
-				rigidbody.Ref.AddForce(force.Val, ForceMode.Force);
-			}
-		}
+                rigidbody.Ref.AddForce(force.Val, ForceMode.Force);
+            }
+        }
 
-		public void Dispose()
-		{
-		}
-	}
+        public void Dispose()
+        {
+        }
+    }
 }
