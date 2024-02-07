@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Core.ECS.Systems;
 using Scellecs.Morpeh;
 
@@ -7,18 +5,11 @@ namespace Core.ECS.Modules
 {
     public class TransformationModule : EcsModule
     {
-        public TransformationModule(World world, ISystemFactory systemFactory) : base(world, systemFactory)
-        {
-        }
+        private readonly TransformSystem _transformSystem;
 
-        protected override IEnumerable<ISystem> CreateSystems()
+        public TransformationModule(TransformSystem transformSystem, World world) : base(world)
         {
-            yield return CreateSystem<TransformSystem>();
-        }
-
-        public override IEnumerable<Type> GetSystemTypes()
-        {
-            yield return typeof(TransformSystem);
+            AddSystem(transformSystem);
         }
     }
 }

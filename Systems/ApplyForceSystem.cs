@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Core.ECS.Systems
 {
-    public class ApplyForcesSystem : IFixedSystem
+    public class ApplyForceSystem : IFixedSystem
     {
         private Filter _filter;
         public World World { get; set; }

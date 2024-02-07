@@ -39,7 +39,7 @@ namespace Core.ECS.Systems
 
         public void Dispose()
         {
-            _transformViewStash?.Dispose();
+           
         }
     }
 }

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Core.Infrastructure.Features;
 using Scellecs.Morpeh;
 
@@ -8,29 +6,19 @@ namespace Core.ECS
     public abstract class EcsModule : IFeatureModule
     {
         private static int _order;
-        private readonly ISystemFactory _systemFactory;
+
+        private readonly SystemsGroup _systemsGroup;
         private readonly World _world;
         private bool _enabled;
 
-        private SystemsGroup _systemsGroup;
-
-        protected EcsModule(World world, ISystemFactory systemFactory)
+        protected EcsModule(World world)
         {
             _world = world;
-            _systemFactory = systemFactory;
+            _systemsGroup = _world.CreateSystemsGroup();
         }
 
         public void Enable()
         {
-            var systems = CreateSystems();
-
-            _systemsGroup = _world.CreateSystemsGroup();
-
-            foreach (var system in systems)
-            {
-                _systemsGroup.AddSystem(system);
-            }
-
             _world.AddSystemsGroup(_order++, _systemsGroup);
 
             _enabled = true;
@@ -43,12 +31,9 @@ namespace Core.ECS
             _enabled = false;
         }
 
-        protected abstract IEnumerable<ISystem> CreateSystems();
-        public abstract IEnumerable<Type> GetSystemTypes();
-
-        protected ISystem CreateSystem<T>() where T : ISystem
+        protected void AddSystem(ISystem system)
         {
-            return _systemFactory.Create<T>();
+            _systemsGroup.AddSystem(system);
         }
     }
 }
