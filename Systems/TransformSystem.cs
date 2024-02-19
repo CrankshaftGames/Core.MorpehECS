@@ -17,6 +17,7 @@ namespace Core.ECS.Systems
             _filter = World.Filter
                 .With<TransformComponent>()
                 .With<TransformViewComponent>()
+                .With<MovingComponent>()
                 .Build()
                 .AsNative();
 
