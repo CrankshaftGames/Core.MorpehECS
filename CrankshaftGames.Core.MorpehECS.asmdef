@@ -2,8 +2,8 @@
     "name": "CrankshaftGames.Core.MorpehECS",
     "rootNamespace": "",
     "references": [
-        "Scellecs.Morpeh",
-        "CrankshaftGames.Core.Infrastructure"
+        "GUID:3377deebfb0acde45876d12c6e3d27cc",
+        "GUID:68c243bc59117494e9552199cce0a21c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
