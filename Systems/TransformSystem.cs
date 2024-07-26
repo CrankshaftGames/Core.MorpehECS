@@ -31,6 +31,7 @@ namespace Core.ECS.Systems
             {
                 var entityId = _filter[i];
                 World.TryGetEntity(entityId, out var entity);
+                
                 var tr = _transformStash.Get(entityId);
                 var view = _transformViewStash.Get(entity);
                 view.Reference.SetPositionAndRotation(tr.Position, tr.Rotation);

@@ -1,0 +1,17 @@
+{
+    "name": "CrankshaftGames.Core.MorpehECS",
+    "rootNamespace": "",
+    "references": [
+        "Scellecs.Morpeh",
+        "CrankshaftGames.Core.Infrastructure"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

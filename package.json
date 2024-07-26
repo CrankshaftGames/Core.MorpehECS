@@ -1,0 +1,23 @@
+{
+  "name": "com.crankshaftgames.core.ecs",
+  "author": "Crankshaft Games",
+  "displayName": "Core.MorpehECS",
+  "description": "Framework that provides infrastructure to boost ecs development.",
+  "unity": "2020.3",
+  "version": "0.0.1",
+  "keywords": [
+    "crankshaftgames",
+    "core",
+    "framework",
+    "architecture"
+  ],
+  "dependencies": {
+    "com.crankshaftgames.core.infrastructure": "https://github.com/CrankshaftGames/Core.Infrastructure#0.0.1",
+    "com.scellecs.morpeh": "https://github.com/scellecs/morpeh#2023.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CrankshaftGames/Core.MorpehECS"
+  },
+  "changelogUrl": "https://github.com/CrankshaftGames/Core.Infrastructure/releases/tag/0.0.1"
+}

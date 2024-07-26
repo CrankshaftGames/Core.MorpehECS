@@ -3,7 +3,7 @@ using Scellecs.Morpeh;
 
 namespace Core.ECS
 {
-    public abstract class EcsModule : IFeatureModule
+    public abstract class EcsModule
     {
         private static int _order;
 
